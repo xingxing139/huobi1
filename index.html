@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加密交易所首页</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding-bottom: 60px; /* 给底部导航栏留出空间 */
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #111;
+      color: white;
+    }
+
+    .header .logo img {
+      height: 40px;
+    }
+
+    .header .settings,
+    .header .user-avatar {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .header .user-avatar img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%; /* 圆形头像 */
+    }
+
+    /* 轮播图样式 */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    /* 轮播图控制按钮 */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 1;
+    }
+
+    .carousel-button.prev {
+      left: 10px;
+    }
+
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    .markets {
+      padding: 20px;
+      background-color: #111;
+    }
+
+    .markets h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .market-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .market-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #ffffff;
+    }
+
+    .market-item .market-name {
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .market-item .market-price,
+    .market-item .market-change {
+      color: #ffffff;
+    }
+
+    .market-item .market-change {
+      font-size: 14px;
+    }
+
+    /* 底部状态栏 */
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #111;
+      color: white;
+      display: flex;
+      justify-content: center; /* Ensures content is centered */
+      align-items: center;
+      padding: 10px 0;
+      z-index: 100;
+    }
+
+    .footer-nav ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      justify-content: space-between; /* Distributes items evenly with space between */
+      width: 100%;
+    }
+
+    .footer-nav ul li {
+      flex: 1;  /* Each item takes equal space */
+      text-align: center;
+    }
+
+    .footer-nav ul li a {
+      display: flex;
+      flex-direction: column;  /* Icon above text */
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-nav ul li a img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 5px;  /* Space between icon and text */
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #111;
+      color: white;
+    }
+
+    .features {
+      padding: 20px;
+      background-color: #111;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .feature-item:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="settings">⚙️</div> <!-- Settings icon -->
+    <div class="logo">
+      <img src="./bgcoin-logo2.png" alt="Logo" />
+    </div>
+    <div class="user-avatar">
+      <img src="./ig主头像.png" alt="User Avatar" /> <!-- Circular avatar -->
+    </div>
+  </header>
+
+  <!-- 轮播图 -->
+  <section class="carousel-container">
+    <div class="carousel">
+      <img src="./unnamed.png" alt="Banner 1">
+      <img src="./中文登录.png" alt="Banner 2">
+      <img src=".unnamed.png" alt="Banner 3">
+      <img src="./中文登录.png" alt="Banner 4">
+    </div>
+    <button class="carousel-button prev" onclick="moveCarousel(-1)">&#10094;</button>
+    <button class="carousel-button next" onclick="moveCarousel(1)">&#10095;</button>
+  </section>
+
+  <section class="features">
+    <div class="feature-grid">
+      <div class="feature-item">
+        <img src="./web_tasks_clipboard_icon_262490.png" alt="购买" />
+        <p>购买</p>
+      </div>
+      <div class="feature-item">
+        <img src="./bar_analytics_diagram_statistics_report_graph_business_chart_icon_262495.png" alt="行情" />
+        <p>行情</p>
+      </div>
+      <div class="feature-item">
+        <img src="./analytics_diagram_statistics_report_graph_business_chart_icon_262498.png" alt="交易" />
+        <p>交易</p>
+      </div>
+      <div class="feature-item">
+        <img src="./shopping_label_marketing_optimization_business_seo_tag_icon_262492.png" alt="充值" />
+        <p>充值</p>
+      </div>
+      <div class="feature-item">
+        <img src="./code_dev_icon_262500.png" alt="申购" />
+        <p>申购</p>
+      </div>
+      <div class="feature-item">
+        <img src="./dartboard_focus_bullseye_marketing_arrow_business_target_icon_262501.png" alt="期权交易" />
+        <p>期权交易</p>
+      </div>
+      <div class="feature-item">
+        <img src="./marketing_icon_262497.png" alt="客服" />
+        <p>客服</p>
+      </div>
+      <div class="feature-item">
+        <img src="./web_magnifier_look_magnifying_seo_glass_find_search_icon_262503.png" alt="更多" />
+        <p>更多</p>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="markets">
+    <h2>市场概览</h2>
+    <div class="market-list">
+      <!-- 20个币种的行情 -->
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+      <!-- 更多币种项 -->
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+
+      <div class="market-item">
+        <span class="market-name">BTC/USDT</span>
+        <span class="market-price">￥450,000</span>
+        <span class="market-change">+5.6%</span>
+      </div>
+      <!-- Add more market items as needed -->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2024 加密交易所 | 版权所有</p>
+  </footer>
+
+  <!-- 底部导航栏 -->
+  <nav class="footer-nav">
+    <ul>
+      <li><a href="#"><img src="./valentine_like_valentines_romance_romantic_love_icon_262499.png" alt="首页" /><p>首页</p></a></li>
+      <li><a href="#"><img src="./bar_analytics_diagram_statistics_report_graph_business_chart_icon_262495.png" alt="行情" /><p>行情</p></a></li>
+      <li><a href="#"><img src="./code_dev_icon_262500.png" alt="交换" /><p>交换</p></a></li>
+      <li><a href="#"><img src="./dartboard_focus_bullseye_marketing_arrow_business_target_icon_262501.png" alt="钱包" /><p>交易</p></a></li>
+      <li><a href="#"><img src="./disk_download_file_safety_storage_save_protection_icon_262502.png" alt="账户" /><p>钱包</p></a></li>
+    </ul>
+  </nav>
+
+  <script>
+    let currentIndex = 0;
+    const carouselImages = document.querySelectorAll('.carousel img');
+
+    function moveCarousel(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = carouselImages.length - 1;
+      if (currentIndex >= carouselImages.length) currentIndex = 0;
+      document.querySelector('.carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  </script>
+</body>
+</html>
